@@ -1,1 +1,1 @@
-# PlateformeIA-ducativeAvecAgent
+# PlateformeIAEducativeAvecAgent

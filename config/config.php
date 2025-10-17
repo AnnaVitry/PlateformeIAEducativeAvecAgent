@@ -25,7 +25,7 @@ foreach ($lines as $line) {
 
 // Définition des constantes pour un accès facile
 define('DB_HOST', $config['DB_HOST'] ?? 'localhost');
-define('DB_NAME', $config['DB_NAME'] ?? '');// This '' is the recommended default.
-define('DB_USER', $config['DB_USER'] ?? '');// If DB_<...> is missing from the .env file,
-define('DB_PASS', $config['DB_PASS'] ?? '');// the script fails safely during the PDO connection attempt
+define('DB_NAME', $config['DB_NAME'] ?? '');// Ceci '' est recommandé par défaut.
+define('DB_USER', $config['DB_USER'] ?? '');// SiDB_<...> n'est pas dans le fichier .env,
+define('DB_PASS', $config['DB_PASS'] ?? '');// le script échoue en toute sécurité lors de la tentative de connexion PDO
 ?>

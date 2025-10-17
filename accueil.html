@@ -1,50 +1,511 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <title>MemzellIrma</title>
-    </head>
-    <body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EssenceIA Bêta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f7fa;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: #fff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .logo-beta {
+            font-style: italic;
+            color: #3b82f6;
+            font-weight: 400;
+        }
+
+        .menu {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .menu-item:hover {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .menu-item.active {
+            background-color: #eff6ff;
+            color: #3b82f6;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .menu-item-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .menu-item.expandable::after {
+            content: '›';
+            margin-left: auto;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+
+        .credits {
+            padding: 20px;
+            margin: 0 20px;
+            background-color: #f9fafb;
+            border-radius: 12px;
+        }
+
+        .credits-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .credits-value {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 100%);
+            width: 100%;
+        }
+
+        .support {
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .support-text {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+        }
+
+        .header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #6b7280;
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f9fafb;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* Chat Area */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+        }
+
+        .assistant-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #e5e7eb;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .assistant-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .chat-title {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 40px;
+        }
+
+        /* Input Area */
+        .input-area {
+            padding: 24px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .input-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background-color: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            transition: all 0.2s;
+        }
+
+        .input-box:focus-within {
+            border-color: #3b82f6;
+            background-color: #ffffff;
+        }
+
+        .message-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            color: #1f2937;
+        }
+
+        .send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .send-btn:hover {
+            background-color: #2563eb;
+            transform: scale(1.05);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 100px;
+        }
+
+        .action-btn:hover {
+            background-color: #f9fafb;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .action-btn.primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .action-btn.primary:hover {
+            background-color: #2563eb;
+        }
+
+        .action-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .action-label {
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        .action-btn.primary .action-label {
+            color: white;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            background-color: #ef4444;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="logo">UI</div>
-
-            <div class="menu-item-a">
-                <span class="menu-icon">^^</span>
-                <span>Accueil</span>
+            <div class="logo">
+                <div class="logo-icon">E</div>
+                <div>
+                    <span class="logo-text">EssenceIA </span>
+                    <span class="logo-beta">Bêta</span>
+                </div>
             </div>
 
-            <div class="menu-item-a">
-                <span class="menu-icon">^^</span>
-                <span>Tableau de bord</span>
+            <nav class="menu">
+                <div class="menu-item active">
+                    <span class="menu-item-icon">🏠</span>
+                    <span>Accueil</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-item-icon">📊</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-item-icon">💬</span>
+                    <span>Assistants</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-item-icon">📁</span>
+                    <span>Mes fichiers</span>
+                </div>
+                <div class="menu-item expandable">
+                    <span class="menu-item-icon">✏️</span>
+                    <span>EIA Texte</span>
+                </div>
+                <div class="menu-item expandable">
+                    <span class="menu-item-icon">📄</span>
+                    <span>EIA Document</span>
+                </div>
+                <div class="menu-item expandable">
+                    <span class="menu-item-icon">🖼️</span>
+                    <span>EIA Image</span>
+                </div>
+                <div class="menu-item expandable">
+                    <span class="menu-item-icon">🎵</span>
+                    <span>EIA Audio</span>
+                </div>
+            </nav>
+
+            <div class="credits">
+                <div class="credits-header">
+                    <span>🎟️</span>
+                    <span>Crédits</span>
+                    <span style="margin-left: auto; font-weight: 600; color: #1f2937;">100%</span>
+                </div>
+                <div class="credits-value">15000 / 15000</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
             </div>
 
-            <div class="menu-item-a">
-                <span class="menu-icon">^^</span>
-                <span>Assitant</span>
-            </div>
-
-            <div class="menu-item-a">
-                <span class="menu-icon">^^</span>
-                <span>Historique</span>
-            </div>
-
-            <div class="menu-item-a">
-                <span class="menu-icon">^^</span>
-                <span>Parametres</span>
+            <div class="support">
+                <div class="support-text">☰ GARÇONNET</div>
+                <div class="support-text" style="margin-top: 12px;">Support 🎧</div>
             </div>
         </aside>
-        <main>
-            
-        </main>
-    </body>
-</html>
 
-<!-- <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Tableau de bord</a></li>
-                    <li><a href="#">Assistant</a></li>
-                    <li><a href="#">Historiques</a></li>
-                    <li><a href="#">Paramètres</a></li>
-                </ul> -->
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <button class="btn btn-primary">Inscription</button>
+                    <button class="btn btn-secondary">EIA Chat 💬</button>
+                    <button class="btn btn-secondary">Recherche Web 🌐</button>
+                </div>
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" class="search-input" placeholder="Recherche rapide">
+                </div>
+                <div class="notification-badge">0</div>
+            </header>
+
+            <div class="chat-area">
+                <div class="assistant-avatar">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23e5e7eb'/%3E%3C/svg%3E" alt="Assistant">
+                </div>
+                <h2 class="chat-title">Comment puis-je vous aider aujourd'hui ?</h2>
+
+                <div class="action-buttons">
+                    <div class="action-btn primary">
+                        <div class="action-icon">+</div>
+                        <div class="action-label">Ajouter</div>
+                    </div>
+                    <div class="action-btn">
+                        <div class="action-icon">✉️</div>
+                        <div class="action-label">Email<br>Création</div>
+                    </div>
+                    <div class="action-btn">
+                        <div class="action-icon">📷</div>
+                        <div class="action-label">Insta -<br>Légende de photo</div>
+                    </div>
+                    <div class="action-btn">
+                        <div class="action-icon">📋</div>
+                        <div class="action-label">Rapport<br>d'activité</div>
+                    </div>
+                    <div class="action-btn">
+                        <div class="action-icon">❓</div>
+                        <div class="action-label">Questionner<br>un fichier PD...</div>
+                    </div>
+                    <div class="action-btn">
+                        <div class="action-icon">🖼️</div>
+                        <div class="action-label">Analyse<br>d'image</div>
+                    </div>
+                    <div class="action-btn">
+                        <div class="action-icon">⋯</div>
+                        <div class="action-label">Modifier</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <div class="input-box">
+                        <input type="text" class="message-input" placeholder="Je veux faire un compte rend">
+                        <button class="send-btn">→</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

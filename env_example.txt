@@ -1,6 +1,0 @@
-# Configuration de la connexion à la base de données
-
-DB_HOST=localhost
-DB_NAME=<database_name>
-DB_USER=<username>
-DB_PASS=<password>

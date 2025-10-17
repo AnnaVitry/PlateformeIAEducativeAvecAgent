@@ -55,6 +55,7 @@ CREATE TABLE Agents (
 -- ===================================
 
 CREATE TABLE Discucss (
+    id_discuss INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
     id_agent INT,
     PRIMARY KEY(id_user, id_agent),
@@ -63,6 +64,7 @@ CREATE TABLE Discucss (
 );
 
 CREATE TABLE Has (
+    id_has INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
     id_level INT,
     PRIMARY KEY(id_user, id_level),
@@ -71,6 +73,7 @@ CREATE TABLE Has (
 );
 
 CREATE TABLE Study (
+    id_study INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
     id_subject INT,
     PRIMARY KEY(id_user, id_subject),

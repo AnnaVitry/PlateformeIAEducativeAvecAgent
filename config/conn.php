@@ -6,7 +6,7 @@ require_once 'config.php';
 $SQL_FILE = 'database.sql'; 
 
 try {
-    // Etablie la connection PDO avec les paramétres .env
+    // Establishing the PDO connection using the constants
     $pdo = new PDO(
         "mysql:host=" . DB_HOST . ";charset=utf8",
         DB_USER,

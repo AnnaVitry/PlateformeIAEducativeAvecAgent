@@ -1,3 +1,4 @@
+-- Active: 1760599431522@@127.0.0.1@5432@postgres
 -- Suppression des tables si elles existent déjà
 DROP TABLE IF EXISTS Study, Has, Discucss, Agents, Users, Levels, Subjects, Roles;
 

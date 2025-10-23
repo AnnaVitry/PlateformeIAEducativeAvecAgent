@@ -4,10 +4,9 @@ namespace Models;
 
 use \Config\conn;
 
-class User {
+class Users {
 
     private $conn;
-
     public function __construct()
     {
         $database = new conn();
@@ -51,3 +50,5 @@ class User {
         return $stmt->execute();
     }
 }
+
+?>

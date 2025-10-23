@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframes EduAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .wireframes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .wireframe {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .wireframe-title {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .wireframe-content {
+            padding: 1.5rem;
+        }
+
+        .wire-box {
+            border: 2px dashed #999;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+
+        .wire-header {
+            background: #e0e0e0;
+            padding: 1rem;
+            margin: -1rem -1rem 1rem -1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wire-logo {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .wire-nav {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .wire-button {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .wire-button-secondary {
+            background: #ddd;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .wire-input {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 0.8rem;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .wire-card {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .wire-sidebar {
+            background: #2d2d2d;
+            color: white;
+            padding: 1rem;
+            min-height: 300px;
+        }
+
+        .wire-menu-item {
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: #3d3d3d;
+            border-radius: 5px;
+        }
+
+        .wire-stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .wire-table {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+        }
+
+        .wire-table-row {
+            padding: 0.8rem;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1rem;
+        }
+
+        .wire-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            margin: -1rem -1rem 1rem -1rem;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #43e97b;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .wireframes-grid {
+                grid-template-columns: 1fr;
+            }
+            .layout-2col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📐 Wireframes - EduAI Platform</h1>
+
+        <div class="wireframes-grid">
+            <!-- Page Accueil -->
+            <div class="wireframe">
+                <div class="wireframe-title">1. PAGE D'ACCUEIL</div>
+                <div class="wireframe-content">
+                    <div class="wire-box">
+                        <div class="wire-header">
+                            <div class="wire-logo">🎓 EduAI</div>
+                            <div class="wire-nav">
+                                <span>Accueil</span>
+                                <span>Matières</span>
+                                <span>À propos</span>
+                                <div class="wire-button">Commencer</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wire-box">
+                        <div class="wire-hero">
+                            <h2>Ton assistant IA pour réussir</h2>
+                            <p>De la 6ème à la Terminale</p>
+                            <br>
+                            <div class="wire-button">Essayer gratuitement</div>
+                            <div class="wire-button-secondary">En savoir plus</div>
+                        </div>
+                    </div>
+
+                    <div class="wire-box">
+                        <strong>Comment ça marche ?</strong>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+                            <div class="wire-card">📝 1. Choisis</div>
+                            <div class="wire-card">🤖 2. Pose questions</div>
+                            <div class="wire-card">💡 3. Comprends</div>
+                            <div class="wire-card">📊 4. Progresse</div>
+                        </div>
+                    </div>
+
+                    <div class="wire-box">
+                        <strong>Matières disponibles</strong>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+                            <div class="wire-card">🔢 Maths</div>
+                            <div class="wire-card">📚 Français</div>
+                            <div class="wire-card">🧪 Sciences</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inscription -->
+            <div class="wireframe">
+                <div class="wireframe-title">2. INSCRIPTION</div>
+                <div class="wireframe-content">
+                    <div class="wire-box">
+                        <div class="wire-header">
+                            <div class="wire-logo">🎓 EduAI</div>
+                            <div class="wire-nav">
+                                <span>← Retour</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wire-box" style="max-width: 400px; margin: 2rem auto;">
+                        <h3 style="text-align: center; margin-bottom: 1.5rem;">Créer un compte</h3>
+                        
+                        <div class="wire-input">📧 Prénom</div>
+                        <div class="wire-input">📧 Nom</div>
+                        <div class="wire-input">📧 Email</div>
+                        <div class="wire-input">🔒 Mot de passe</div>
+                        <div class="wire-input">🔒 Confirmer mot de passe</div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong>Niveau :</strong><br>
+                            <label><input type="radio"> Collège (6ème - 3ème)</label><br>
+                            <label><input type="radio"> Lycée (Seconde - Terminale)</label>
+                        </div>
+
+                        <div class="wire-button" style="width: 100%; text-align: center; margin-top: 1rem;">
+                            S'inscrire
+                        </div>
+
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                            Déjà un compte ? <a href="#" style="color: #667eea;">Se connecter</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connexion -->
+            <div class="wireframe">
+                <div class="wireframe-title">3. CONNEXION</div>
+                <div class="wireframe-content">
+                    <div class="wire-box">
+                        <div class="wire-header">
+                            <div class="wire-logo">🎓 EduAI</div>
+                            <div class="wire-nav">
+                                <span>← Retour</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wire-box" style="max-width: 400px; margin: 2rem auto;">
+                        <h3 style="text-align: center; margin-bottom: 1.5rem;">Connexion</h3>
+                        
+                        <div class="wire-input">📧 Email</div>
+                        <div class="wire-input">🔒 Mot de passe</div>
+
+                        <p style="text-align: right; font-size: 0.9rem; margin-bottom: 1rem;">
+                            <a href="#" style="color: #667eea;">Mot de passe oublié ?</a>
+                        </p>
+
+                        <div class="wire-button" style="width: 100%; text-align: center;">
+                            Se connecter
+                        </div>
+
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                            Pas encore de compte ? <a href="#" style="color: #667eea;">S'inscrire</a>
+                        </p>
+
+                        <hr style="margin: 2rem 0;">
+
+                        <div class="wire-button-secondary" style="width: 100%; text-align: center;">
+                            🔐 Connexion Admin
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Élève -->
+            <div class="wireframe" style="grid-column: span 2;">
+                <div class="wireframe-title">4. DASHBOARD ÉLÈVE</div>
+                <div class="wireframe-content">
+                    <div class="wire-box">
+                        <div class="layout-2col">
+                            <div class="wire-sidebar">
+                                <div style="text-align: center; padding: 1rem; margin-bottom: 1rem;">
+                                    <div style="width: 60px; height: 60px; background: #667eea; border-radius: 50%; margin: 0 auto 0.5rem;"></div>
+                                    <strong>Jean Dupont</strong><br>
+                                    <small>3ème</small>
+                                </div>
+                                <div class="wire-menu-item">📊 Dashboard</div>
+                                <div class="wire-menu-item">📚 Matières</div>
+                                <div class="wire-menu-item">✏️ Exercices</div>
+                                <div class="wire-menu-item">📈 Mes Progrès</div>
+                                <div class="wire-menu-item">👤 Mon Profil</div>
+                                <div class="wire-menu-item" style="margin-top: 2rem; background: #f5576c;">🚪 Déconnexion</div>
+                            </div>
+
+                            <div>
+                                <h2 style="margin-bottom: 1rem;">Bienvenue Jean ! 👋</h2>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                                    <div class="wire-stat-box">
+                                        <h3>12</h3>
+                                        <p>Exercices complétés</p>
+                                    </div>
+                                    <div class="wire-stat-box">
+                                        <h3>85%</h3>
+                                        <p>Taux de réussite</p>
+                                    </div>
+                                    <div class="wire-stat-box">
+                                        <h3>5</h3>
+                                        <p>Jours d'affilée</p>
+                                    </div>
+                                </div>
+
+                                <div class="wire-box">
+                                    <h3>Mes matières</h3>
+                                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem;">
+                                        <div class="wire-card">
+                                            🔢 Mathématiques<br>
+                                            <span class="tag">Niveau 3</span>
+                                        </div>
+                                        <div class="wire-card">
+                                            📚 Français<br>
+                                            <span class="tag">Niveau 2</span>
+                                        </div>
+                                        <div class="wire-card">
+                                            🧪 Sciences<br>
+                                            <span class="tag">Niveau 4</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="wire-box">
+                                    <h3>Activité récente</h3>
+                                    <div class="wire-card">✅ Exercice de maths terminé - Il y a 2h</div>
+                                    <div class="wire-card">💬 Question posée en français - Hier</div>
+                                    <div class="wire-card">🎯 Nouveau badge débloqué ! - Il y a 3 jours</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profil -->
+            <div class="wireframe">
+                <div class="wireframe-title">5. PROFIL ÉLÈVE</div>
+                <div class="wireframe-content">
+                    <div class="wire-box">
+                        <h3 style="margin-bottom: 1rem;">Mon Profil</h3>
+                        
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <div style="width: 100px; height: 100px; background: #667eea; border-radius: 50%; margin: 0 auto 1rem;"></div>
+                            <div class="wire-button-secondary">Changer la photo</div>
+                        </div>
+
+                        <div class="wire-input">Prénom: Jean</div>
+                        <div class="wire-input">Nom: Dupont</div>
+                        <div class="wire-input">Email: jean.dupont@email.com</div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong>Niveau actuel :</strong><br>
+                            <select class="wire-input">
+                                <option>6ème</option>
+                                <option>5ème</option>
+                                <option selected>3ème</option>
+                            </select>
+                        </div>
+
+                        <div class="wire-button" style="width: 100%; text-align: center;">
+                            💾 Sauvegarder
+                        </div>
+
+                        <hr style="margin: 2rem 0;">
+
+                        <h4>Changer le mot de passe</h4>
+                        <div class="wire-input">Ancien mot de passe</div>
+                        <div class="wire-input">Nouveau mot de passe</div>
+                        <div class="wire-input">Confirmer nouveau</div>
+                        
+                        <div class="wire-button" style="width: 100%; text-align: center;">
+                            🔒 Modifier
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Admin (Backoffice) -->
+            <div class="wireframe" style="grid-column: span 2;">
+                <div class="wireframe-title" style="background: #f5576c;">6. DASHBOARD ADMIN (BACKOFFICE)</div>
+                <div class="wireframe-content">
+                    <div class="wire-box">
+                        <div class="layout-2col">
+                            <div class="wire-sidebar" style="background: #1a1a1a;">
+                                <h3 style="color: #f5576c; margin-bottom: 1rem;">⚡ ADMIN</h3>
+                                <div class="wire-menu-item">📊 Vue d'ensemble</div>
+                                <div class="wire-menu-item">👥 Utilisateurs</div>
+                                <div class="wire-menu-item">📚 Gestion Contenu</div>
+                                <div class="wire-menu-item">📈 Statistiques</div>
+                                <div class="wire-menu-item">⚙️ Paramètres</div>
+                                <div class="wire-menu-item" style="margin-top: 2rem; background: #f5576c;">🚪 Déconnexion</div>
+                            </div>
+
+                            <div>
+                                <h2 style="margin-bottom: 1rem;">Administration - Vue d'ensemble</h2>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                                    <div class="wire-stat-box" style="background: #f5576c;">
+                                        <h3>1,234</h3>
+                                        <p>Utilisateurs totaux</p>
+                                    </div>
+                                    <div class="wire-stat-box" style="background: #43e97b;">
+                                        <h3>856</h3>
+                                        <p>Actifs ce mois</p>
+                                    </div>
+                                    <div class="wire-stat-box" style="background: #4facfe;">
+                                        <h3>5,678</h3>
+                                        <p>Questions posées</p>
+                                    </div>
+                                    <div class="wire-stat-box" style="background: #fa709a;">
+                                        <h3>98%</h3>
+                                        <p>Satisfaction</p>
+                                    </div>
+                                </div>
+
+                                <div class="wire-box">
+                                    <h3>Gestion des utilisateurs</h3>
+                                    <div class="wire-table">
+                                        <div class="wire-table-row">
+                                            <strong>Nom</strong>
+                                            <strong>Email</strong>
+                                            <strong>Niveau</strong>
+                                            <strong>Inscription</strong>
+                                            <strong>Actions</strong>
+                                        </div>
+                                        <div class="wire-table-row">
+                                            <span>Jean Dupont</span>
+                                            <span>jean@email.com</span>
+                                            <span>3ème</span>
+                                            <span>15/01/2025</span>
+                                            <span>✏️ 🗑️</span>
+                                        </div>
+                                        <div class="wire-table-row">
+                                            <span>Marie Martin</span>
+                                            <span>marie@email.com</span>
+                                            <span>1ère</span>
+                                            <span>12/01/2025</span>
+                                            <span>✏️ 🗑️</span>
+                                        </div>
+                                        <div class="wire-table-row">
+                                            <span>Paul Durand</span>
+                                            <span>paul@email.com</span>
+                                            <span>Terminale</span>
+                                            <span>10/01/2025</span>
+                                            <span>✏️ 🗑️</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="wire-box">
+                                    <h3>Activité récente du système</h3>
+                                    <div class="wire-card">✅ 23 nouveaux utilisateurs inscrits aujourd'hui</div>
+                                    <div class="wire-card">📊 456 exercices complétés cette semaine</div>
+                                    <div class="wire-card">🆕 Nouveau contenu ajouté en Mathématiques</div>
+                                    <div class="wire-card">⚠️ 2 signalements à traiter</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <h3 style="margin-bottom: 1rem;">📋 Structure de Navigation</h3>
+            <p><strong>Public :</strong> Accueil → Inscription/Connexion</p>
+            <p><strong>Élève connecté :</strong> Dashboard → Matières → Profil → Exercices → Progrès</p>
+            <p><strong>Admin connecté :</strong> Dashboard Admin → Utilisateurs → Contenu → Stats → Paramètres</p>
+        </div>
+    </div>
+</body>
+</html>

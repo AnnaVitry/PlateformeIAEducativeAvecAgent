@@ -7,6 +7,7 @@ if (!file_exists($dotenv_path)) {
     die("Erreur: Le fichier .env est introuvable. Veuillez le créer et le remplir.\n");
 }
 
+
 // Lecture et parsing manuel du fichier .env
 $lines = file($dotenv_path, FILE_SKIP_EMPTY_LINES);
 $config = [];

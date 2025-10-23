@@ -2,15 +2,14 @@
 
 namespace Models;
 
-use \Config\conn;
+use \Config\Database;
 
-class User {
+class Users {
 
     private $conn;
-
     public function __construct()
     {
-        $database = new conn();
+        $database = new Database();
         $this->conn = $database->connect();
     }
 
@@ -51,3 +50,5 @@ class User {
         return $stmt->execute();
     }
 }
+
+?>

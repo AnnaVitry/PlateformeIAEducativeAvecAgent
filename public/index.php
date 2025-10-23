@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/PlateformeIAEducativeAvecAgent/public/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>EduAI - Ton assistant IA pour réussir</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#matieres">Matières</a></li>
                 <li><a href="#fonctionnalites">Fonctionnalités</a></li>
-                <li><a href="../views/login.php" class="btn-primary">Commencer</a></li>
+                <li><a href="../views/user_registration.php" class="btn-primary">Commencer</a></li>
             </ul>
         </nav>
     </header>
@@ -24,7 +24,7 @@
             <h1>Ton assistant IA pour réussir au collège et au lycée</h1>
             <p>Apprends à ton rythme avec une IA qui s'adapte à ton niveau. Disponible 24/7 pour t'aider en maths, français, sciences et plus encore !</p>
             <div class="hero-cta">
-                <a href="../views/login.php" class="btn-primary">Essayer gratuitement</a>
+                <a href="inscription.html" class="btn-primary">Essayer gratuitement</a>
                 <a href="#" class="btn-secondary">Voir comment ça marche</a>
             </div>
         </div>
@@ -131,7 +131,7 @@
     <section class="cta-section">
         <h2>Prêt à booster tes résultats ?</h2>
         <p>Rejoins des milliers d'élèves qui progressent chaque jour avec EduAI</p>
-        <a href="../views/login.php" class="btn-secondary">Commencer gratuitement</a>
+        <a href="inscription.html" class="btn-secondary">Commencer gratuitement</a>
     </section>
 
     <footer>

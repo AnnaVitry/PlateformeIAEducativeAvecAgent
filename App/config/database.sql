@@ -1,4 +1,4 @@
--- Active: 1761286188054@@127.0.0.1@3306@sad
+-- Active: 1760599431522@@127.0.0.1@5432@postgres
 -- Suppression des tables si elles existent déjà
 DROP TABLE IF EXISTS Study, Has, Discucss, Agents, Users, Levels, Subjects, Roles;
 
@@ -59,7 +59,7 @@ CREATE TABLE Discucss (
     id_discuss INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
     id_agent INT,
-    -- PRIMARY KEY(id_user, id_agent),
+    PRIMARY KEY(id_user, id_agent),
     FOREIGN KEY(id_user) REFERENCES Users(id_user),
     FOREIGN KEY(id_agent) REFERENCES Agents(id_agent)
 );
@@ -68,7 +68,7 @@ CREATE TABLE Has (
     id_has INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
     id_level INT,
-    -- PRIMARY KEY(id_user, id_level),
+    PRIMARY KEY(id_user, id_level),
     FOREIGN KEY(id_user) REFERENCES Users(id_user),
     FOREIGN KEY(id_level) REFERENCES Levels(id_level)
 );
@@ -77,7 +77,7 @@ CREATE TABLE Study (
     id_study INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
     id_subject INT,
-    -- PRIMARY KEY(id_user, id_subject),
+    PRIMARY KEY(id_user, id_subject),
     FOREIGN KEY(id_user) REFERENCES Users(id_user),
     FOREIGN KEY(id_subject) REFERENCES Subjects(id_subject)
 );

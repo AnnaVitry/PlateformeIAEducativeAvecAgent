@@ -1,14 +1,17 @@
 <?php
+// Charger l'autoloader
+require_once __DIR__ . '/../autoload.php';
 
-require_once __DIR__ . '/../Controllers/UserController.php';
-use App\Controllers\UserController;
+use Controllers\UserController;
 
 // Traiter le formulaire si soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userController = new UserController();
+    
     $lastname = $_POST['lastname'] ?? '';
     $firstname = $_POST['firstname'] ?? '';
     $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
     $consentement = isset($_POST['consentement']) ? 1 : 0;
     $creation_date = date('Y-m-d H:i:s');
     

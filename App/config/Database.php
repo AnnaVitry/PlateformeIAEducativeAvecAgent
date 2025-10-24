@@ -1,8 +1,6 @@
 <?php
 namespace App\Config;
 
-require_once 'App/config.php';
-
 use PDO;
 use PDOException;
 

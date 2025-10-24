@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers;
+namespace App\Controllers;
 
-use Models\Roles;
+use App\Models\Roles;
 
 class RolesController
 {

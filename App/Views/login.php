@@ -20,7 +20,7 @@
         <button type="submit" class="btn-primary">Se Connecter</button>
         
         <p class="register-link">
-            Pas encore de compte ? <a href="/inscription">S'inscrire ici</a>
+            Pas encore de compte ? <a href="user_registration.php">S'inscrire ici</a>
         </p>
 
         <button type="submit" class="btn-primary">Connexion Admin</button>

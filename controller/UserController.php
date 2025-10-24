@@ -1,6 +1,6 @@
 <?php
 namespace Controllers;
-
+require_once '../models/User.php';
 use Models\Users;
 
 class UserController {

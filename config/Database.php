@@ -22,7 +22,7 @@ class Database
         try {
             // Connexion PDO en utilisant les constantes définies dans config.php
             $this->pdo = new PDO(
-                "mysql:host=" . DB_HOST . ";charset=utf8",
+                "postgres:host=" . DB_HOST . ";charset=utf8",
                 DB_USER,
                 DB_PASS
             );
@@ -76,4 +76,6 @@ class Database
     }
 }
 
+$db = new Database();
+$db->connect();
 ?>

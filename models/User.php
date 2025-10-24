@@ -1,8 +1,8 @@
 <?php
 
 namespace Models;
-
-use \Config\Database;
+require_once '../config/Database.php';
+use Config\Database;
 
 class Users {
 
@@ -14,7 +14,8 @@ class Users {
     }
 
     public function create($lastname, $firstname, $email, $password, $consentement, $creation_date) {
-        $sql = "INSERT INTO Users (lastname, firstname, email, password, consentement, creation_date) VALUES (:lastname, :firstname, :password, :email, :consentement, :creation_date)";
+        $sql = "INSERT INTO Users (lastname, firstname, email, password, consentement, creation_date) 
+        VALUES (:lastname, :firstname, :email, :password, :consentement, :creation_date)";
         $stmt =  $this->conn->prepare($sql);
         $stmt->bindParam(':lastname', $lastname);
         $stmt->bindParam(':firstname', $firstname);

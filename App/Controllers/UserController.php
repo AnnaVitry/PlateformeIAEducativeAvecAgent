@@ -21,7 +21,7 @@ class UserController {
     }
 
     public function deleteUser($id): bool {
-        $user = new User();
+        $user = new Users();
         return $user->delete(id: $id);
     }    
 }

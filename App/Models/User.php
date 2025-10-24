@@ -1,8 +1,8 @@
 <?php
 
-namespace Models;
-require_once '../config/Database.php';
-use Config\Database;
+namespace App\Models;
+
+use App\Config\Database;
 
 class Users {
 

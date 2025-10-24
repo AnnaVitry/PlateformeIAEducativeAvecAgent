@@ -1,6 +1,7 @@
 <?php
-require_once '../controller/UserController.php';
-use Controllers\UserController;
+
+require_once __DIR__ . '/../Controllers/UserController.php';
+use App\Controllers\UserController;
 
 // Traiter le formulaire si soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lastname = $_POST['lastname'] ?? '';
     $firstname = $_POST['firstname'] ?? '';
     $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
     $consentement = isset($_POST['consentement']) ? 1 : 0;
     $creation_date = date('Y-m-d H:i:s');
     

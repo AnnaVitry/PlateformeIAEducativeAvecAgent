@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Config\Database;
 
-class User {
+class Users {
 
     private $conn;
     public function __construct()

@@ -1,3 +1,7 @@
+<?php
+// Charger l'autoload de Composer pour les classes
+require_once '../vendor/autoload.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

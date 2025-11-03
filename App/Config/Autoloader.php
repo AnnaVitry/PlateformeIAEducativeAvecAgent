@@ -1,5 +1,5 @@
 <?php
-namespace App\config;
+namespace App\Config;
 
 class Autoloader
 {

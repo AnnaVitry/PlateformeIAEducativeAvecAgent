@@ -10,6 +10,7 @@ namespace App\Models;
 //     }
 // }
 
+require_once __DIR__ . '/../Config/Database.php';
 
 use App\Config\Database;
 

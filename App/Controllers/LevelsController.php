@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+require_once __DIR__ . '/../Models/Levels.php';
+
 use App\Models\Levels;
 
 class LevelsController {

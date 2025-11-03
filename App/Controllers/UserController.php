@@ -1,6 +1,9 @@
 <?php
 namespace App\Controllers;
 
+// Chemin relatif depuis le dossier Controllers
+require_once __DIR__ . '/../Models/Users.php';
+
 use App\Models\Users;
 
 // class UserController
@@ -18,6 +21,12 @@ class UserController {
     public function __construct() {
         $this->user = new Users();
     }
+
+    public function index() {
+        $this->user = new Users();
+        echo "UserController fonctionne !";
+    }
+
     public function createUser($lastname, $firstname, $email, $password, $consentement, $creation_date): bool {
         return $this->user->create(lastname: $lastname, firstname: $firstname, email: $email, password: $password, consentement: $consentement, creation_date: $creation_date);
     }

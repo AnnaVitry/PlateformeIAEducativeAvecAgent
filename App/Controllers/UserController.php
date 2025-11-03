@@ -5,16 +5,6 @@ namespace App\Controllers;
 require_once __DIR__ . '/../Models/Users.php';
 
 use App\Models\Users;
-
-// class UserController
-// {
-//     public function index()
-//     {
-//         $user = new Users();
-//         echo "UserController fonctionne avec autoload !";
-//     }
-// }
-
 class UserController {
     public $user;
 
@@ -27,8 +17,8 @@ class UserController {
         echo "UserController fonctionne !";
     }
 
-    public function createUser($lastname, $firstname, $email, $password, $consentement, $creation_date): bool {
-        return $this->user->create(lastname: $lastname, firstname: $firstname, email: $email, password: $password, consentement: $consentement, creation_date: $creation_date);
+    public function createUser($lastname, $firstname, $email, $password, $consentement): bool {
+        return $this->user->create(lastname: $lastname, firstname: $firstname, email: $email, password: $password, consentement: $consentement);
     }
 
     public function getUser(): array {

@@ -17,24 +17,30 @@ use App\Config\Database;
 class Users {
 
     private $conn;
+
     public function __construct()
     {
         $database = new Database();
         $this->conn = $database->connect();
     }
 
-    public function create($lastname, $firstname, $email, $password, $consentement, $creation_date) {
-        $sql = "INSERT INTO Users (lastname, firstname, email, password, consentement, creation_date) VALUES (:lastname, :firstname, :password, :email, :consentement, :creation_date)";
-        $stmt =  $this->conn->prepare($sql);
+    public function create($lastname, $firstname, $email, $password, $consentement)
+    {
+        $sql = "INSERT INTO Users (lastname, firstname, email, password, consentement)
+                VALUES (:lastname, :firstname, :email, :password, :consentement)";
+
+        $stmt = $this->conn->prepare($sql);
+
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
         $stmt->bindParam(':lastname', $lastname);
         $stmt->bindParam(':firstname', $firstname);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':password', $hashedPassword);
         $stmt->bindParam(':consentement', $consentement);
-        $stmt->bindParam(':creation_date', $creation_date);
+
         return $stmt->execute();
     }
-
     public function read(){
         $sql = "SELECT * FROM Users";
         $stmt = $this->conn->prepare($sql);

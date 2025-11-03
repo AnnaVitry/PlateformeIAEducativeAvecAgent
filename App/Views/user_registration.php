@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $consentement = isset($_POST['consentement']) ? 1 : 0;
-    $creation_date = date('Y-m-d H:i:s');
     
     $result = $userController->createUser(
         $lastname, 
@@ -23,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email, 
         $password, 
         $consentement, 
-        $creation_date
     );
     
     if ($result) {

@@ -10,42 +10,46 @@ class Database
 
     public function __construct()
     {
-        
-        require_once __DIR__ ."/config.php"; // si il ne tourve pas les variables de connection DB
-        // On n'a plus besoin de charger manuellement les variables d'environnement
-        // car elles sont déjà définies par config.php
+        require_once __DIR__ . "/config.php";
+
+        try {
+            // Connexion initiale au serveur MySQL (sans base)
+            $this->pdo = new PDO(
+                "mysql:host=" . DB_HOST . ";charset=utf8mb4",
+                DB_USER,
+                DB_PASS
+            );
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Connexion au serveur MySQL réussie.<br>";
+        } catch (PDOException $e) {
+            echo "❌ Erreur de connexion au serveur MySQL : " . $e->getMessage();
+        }
     }
 
     // Connexion à la base de données
     public function connect()
     {
         try {
-            // Connexion PDO en utilisant les constantes définies dans config.php
-            $this->pdo = new PDO(
-                "mysql:host=" . DB_HOST . ";charset=utf8",
-                DB_USER,
-                DB_PASS
-            );
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connexion à la base de données réussie.\n";
-            return $this->pdo;
-        } catch (PDOException $e) {
-            echo "Erreur PDO : " . $e->getMessage();
-        }
-    }
-
-    // Création de la base de données si elle n'existe pas
-    public function createDatabase()
-    {
-        try {
-            $this->connect(); // Connexion initiale pour exécuter les commandes SQL
             $this->pdo->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;");
             $this->pdo->exec("USE `" . DB_NAME . "`;");
-            echo "Base de données '" . DB_NAME . "' créée avec succès.\n";
+            echo "Base de données '" . DB_NAME . "' séléctionnée.\n";
+            return $this->pdo;
         } catch (PDOException $e) {
             echo "Erreur lors de la création de la base de données : " . $e->getMessage();
         }
     }
+    // Création de la base de données si elle n'existe pas
+    // public function createDatabase()
+    // {
+    //     try {
+    //         $this->connect(); // Connexion initiale pour exécuter les commandes SQL
+    //         $this->pdo->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;");
+    //         $this->pdo->exec("USE `" . DB_NAME . "`;");
+    //         echo "Base de données '" . DB_NAME . "' créée avec succès.\n";
+    //     } catch (PDOException $e) {
+    //         echo "Erreur lors de la création de la base de données : " . $e->getMessage();
+    //     }
+    // }
 
     // Importer le fichier SQL
     public function importSQL($sqlFile)

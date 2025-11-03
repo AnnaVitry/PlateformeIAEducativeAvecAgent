@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+require_once __DIR__ . '/../Models/Roles.php';
+
 use App\Models\Roles;
 
 class RoleController

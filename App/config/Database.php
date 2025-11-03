@@ -1,8 +1,6 @@
 <?php
 namespace App\Config;
 
-require_once 'config.php';
-
 use PDO;
 use PDOException;
 
@@ -76,4 +74,6 @@ class Database
     }
 }
 
+$db = new Database();
+$db->connect();
 ?>

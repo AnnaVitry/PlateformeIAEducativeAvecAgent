@@ -4,10 +4,10 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 use App\Controllers\UserController;
 
+
 // Traiter le formulaire si soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userController = new UserController();
-    
+    $userController = new UserController();    
     $lastname = $_POST['lastname'] ?? '';
     $firstname = $_POST['firstname'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -37,9 +37,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../App/public/css/inscription.css">
+    <link rel="stylesheet" href="../public/css/style.css">
     <title>Inscription</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="logo">🎓 EduAI</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#matieres">Matières</a></li>
+                <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+                <li><a href="../App/Views/user_registration.php" class="btn-primary">Commencer</a></li>
+            </ul>
+        </nav>
+    </header>
     <h1>Inscription</h1>
     
     <form method="POST" action="">

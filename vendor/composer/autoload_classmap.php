@@ -6,5 +6,14 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Config\\Database' => $baseDir . '/App/Config/Database.php',
+    'App\\Controllers\\AgentsController' => $baseDir . '/App/Controllers/AgentsController.php',
+    'App\\Controllers\\LevelsController' => $baseDir . '/App/Controllers/LevelsController.php',
+    'App\\Controllers\\RoleController' => $baseDir . '/App/Controllers/RoleController.php',
+    'App\\Controllers\\UserController' => $baseDir . '/App/Controllers/UserController.php',
+    'App\\Models\\Agents' => $baseDir . '/App/Models/Agents.php',
+    'App\\Models\\Levels' => $baseDir . '/App/Models/Levels.php',
+    'App\\Models\\Roles' => $baseDir . '/App/Models/Roles.php',
+    'App\\Models\\Users' => $baseDir . '/App/Models/Users.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 );

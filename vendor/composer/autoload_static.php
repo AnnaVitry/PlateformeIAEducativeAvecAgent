@@ -9,23 +9,27 @@ class ComposerStaticInit72a1e07b7a73a0c15b37159f39c09c06
     public static $prefixLengthsPsr4 = array (
         'A' => 
         array (
-            'App\\Models\\' => 11,
-            'App\\Controllers\\' => 16,
+            'App\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'App\\Models\\' => 
+        'App\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/models',
-        ),
-        'App\\Controllers\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/controller',
+            0 => __DIR__ . '/../..' . '/App',
         ),
     );
 
     public static $classMap = array (
+        'App\\Config\\Database' => __DIR__ . '/../..' . '/App/Config/Database.php',
+        'App\\Controllers\\AgentsController' => __DIR__ . '/../..' . '/App/Controllers/AgentsController.php',
+        'App\\Controllers\\LevelsController' => __DIR__ . '/../..' . '/App/Controllers/LevelsController.php',
+        'App\\Controllers\\RoleController' => __DIR__ . '/../..' . '/App/Controllers/RoleController.php',
+        'App\\Controllers\\UserController' => __DIR__ . '/../..' . '/App/Controllers/UserController.php',
+        'App\\Models\\Agents' => __DIR__ . '/../..' . '/App/Models/Agents.php',
+        'App\\Models\\Levels' => __DIR__ . '/../..' . '/App/Models/Levels.php',
+        'App\\Models\\Roles' => __DIR__ . '/../..' . '/App/Models/Roles.php',
+        'App\\Models\\Users' => __DIR__ . '/../..' . '/App/Models/Users.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

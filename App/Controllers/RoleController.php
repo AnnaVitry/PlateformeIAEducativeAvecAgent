@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Roles;
 
-class RolesController
+class RoleController
 {
     private $role;
 

@@ -11,8 +11,6 @@ class Users
 }
 // namespace App\Models;
 
-// require_once(dirname(__FILE__) ."App/config/Database.php");
-
 // use App\Config\Database;
 
 // class Users {

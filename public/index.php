@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../App/config/Autoloader.php';
+require_once __DIR__ . '/../App/Config/Autoloader.php';
 
-use App\config\Autoloader;
+use App\Config\Autoloader;
 
 Autoloader::register();
 

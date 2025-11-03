@@ -10,6 +10,8 @@ class Database
 
     public function __construct()
     {
+        
+        require_once __DIR__ ."/config.php"; // si il ne tourve pas les variables de connection DB
         // On n'a plus besoin de charger manuellement les variables d'environnement
         // car elles sont déjà définies par config.php
     }

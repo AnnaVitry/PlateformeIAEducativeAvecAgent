@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="/PlateformeIAEducativeAvecAgent/public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
 </head>
 
 <main class="login-container">

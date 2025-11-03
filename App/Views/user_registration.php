@@ -1,6 +1,6 @@
 <?php
-// Charger l'autoloader
-require_once __DIR__ . '/../../vendor/autoload.php';
+
+namespace App\Views;
 
 use App\Controllers\UserController;
 

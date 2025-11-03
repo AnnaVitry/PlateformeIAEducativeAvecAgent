@@ -26,5 +26,3 @@ class LevelsController {
         return $this->level->delete(id: $id);
     }    
 }
-
-?>

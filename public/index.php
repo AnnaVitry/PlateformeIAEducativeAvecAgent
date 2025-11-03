@@ -9,4 +9,4 @@ Autoloader::register();
 use App\Controllers\UserController;
 
 $controller = new UserController();
-$controller->index(); // ou autre méthode
+$controller->getUser();

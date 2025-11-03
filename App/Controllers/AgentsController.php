@@ -6,5 +6,3 @@ use App\Models\Agents;
 class AgentsController {
 //
 }
-
-?>

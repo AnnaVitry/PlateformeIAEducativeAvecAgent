@@ -4,19 +4,19 @@ namespace App\Models;
 
 require_once __DIR__ . '/../Config/Database.php';
 
-use App\Config\Database;
+use PDO;
+use PDOException;
 
 class Users {
 
     private $conn;
 
-    public function __construct()
+    public function __construct(PDO $db)
     {
-        $database = new Database();
-        $this->conn = $database->connect();
+        $this->conn = $db;
     }
 
-    public function create($lastname, $firstname, $email, $password, $consentement)
+    public function create($lastname, $firstname, $email, $password, $consentement): bool
     {
         $sql = "INSERT INTO Users (lastname, firstname, email, password, consentement)
                 VALUES (:lastname, :firstname, :email, :password, :consentement)";
@@ -33,14 +33,16 @@ class Users {
 
         return $stmt->execute();
     }
-    public function read(){
+    public function read(): array
+    {
         $sql = "SELECT * FROM Users";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $lastname, $firstname, $email, $password){
+    public function update($id, $lastname, $firstname, $email, $password): bool
+    {
         $sql = "UPDATE Users SET lastname = :lastname, firstname = :firstname, email =:email, password = :password WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':lastname', $lastname);
@@ -51,12 +53,11 @@ class Users {
         return $stmt->execute();
     }
 
-    public function delete($id) {
+    public function delete($id) 
+    {
         $sql ="DELETE FROM Users WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
 }
-
-?>

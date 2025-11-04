@@ -2,21 +2,29 @@
 
 namespace App\Views;
 
-require_once __DIR__ . '/../Controllers/UserController.php';
+require_once __DIR__ . '/../App/Config/Autoloader.php';
 
-use App\Controllers\UserController;
+use App\Controllers\UsersController;
+use App\Config\Autoloader;
+use App\Config\Database;
 
+// Autoload de toutes les classes
+Autoloader::register();
+
+// Connexion à la base de données
+$db = new Database();
+$pdo = $db->connect(); // retourne ton objet PDO
 
 // Traiter le formulaire si soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userController = new UserController();    
+    $UsersController = new UsersController($pdo);    
     $lastname = $_POST['lastname'] ?? '';
     $firstname = $_POST['firstname'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $consentement = isset($_POST['consentement']) ? 1 : 0;
     
-    $result = $userController->createUser(
+    $result = $UsersController->createUser(
         $lastname, 
         $firstname, 
         $email, 

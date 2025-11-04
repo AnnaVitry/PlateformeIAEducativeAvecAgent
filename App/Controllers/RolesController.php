@@ -5,14 +5,16 @@ namespace App\Controllers;
 require_once __DIR__ . '/../Models/Roles.php';
 
 use App\Models\Roles;
+use PDO;
+use PDOException;
 
-class RoleController
+class RolesController
 {
     private $role;
 
-    public function __construct()
+    public function __construct(PDO $db)
     {
-        $this->role = new Roles();
+        $this->role = new Roles($db);
     }
 
     public function createRoles($roleName)

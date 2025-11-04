@@ -11,25 +11,38 @@ class Database
     public function __construct()
     {
         require_once __DIR__ . "/config.php";
-    }
-
-    // Connexion à la base de données
-    public function connect()
-    {
-       try {
-            // Connexion initiale au serveur MySQL (sans base)
+        try {
+        // Connexion initiale au serveur MySQL (sans base)
             $this->pdo = new PDO(
                 "mysql:host=" . DB_HOST . ";charset=utf8mb4",
                 DB_USER,
                 DB_PASS
             );
-            $this->pdo->exec("USE `" . DB_NAME . "`;");
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connexion au serveur MySQL réussie. Base de données '". DB_NAME ."' sélectionnée.<br>";
-            return $this->pdo;
+            echo "Connexion au serveur MySQL réussie. Base de données <br>";
         } catch (PDOException $e) {
-            echo "❌ Erreur de connexion au serveur MySQL : " . $e->getMessage();
+            echo "Erreur de connexion au serveur MySQL: " . $e->getMessage();
         }
+    }
+
+    // Connexion à la base de données
+    public function connect()
+    {
+        try {
+            $this->pdo->exec("USE `" . DB_NAME . "`;");
+            echo "Base de données '" . DB_NAME . "' sélectionnée.<br>";
+        } catch (PDOException $e) {
+            // Si erreur "Unknown database", on crée la base
+            if (str_contains($e->getMessage(), 'Unknown database')) {
+                echo "⚠️ Base '" . DB_NAME . "' introuvable. Création en cours...<br>";
+                $this->createDatabase();
+            } else {
+                echo "Erreur lors de la sélection de la base : " . $e->getMessage();
+            }
+        }
+
+        return $this->pdo;
+
     }
     // Création de la base de données si elle n'existe pas
     public function createDatabase()

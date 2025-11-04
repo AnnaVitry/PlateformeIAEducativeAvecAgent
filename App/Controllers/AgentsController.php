@@ -1,45 +1,45 @@
 <?php
-namespace App\Controllers; // On inclut le modèle Agent
+namespace App\Controllers;
 
-require_once __DIR__ . '/../Models/Agents.php';// Inclure le modèle Agent
+require_once __DIR__ . '/../Models/Agents.php'; // Inclure le modèle Agent
+require_once __DIR__ . "/../Config/config.php";
+require_once __DIR__ . '/../Services/AiClient.php';
 
-use App\Models\Agents;// Utiliser le modèle Agent
+use App\Models\Agents;
+use App\Services\AiClient;
 
 class AgentsController {
 
     public function handleRequest()
     {
-        // Récupère le message envoyé depuis le front
-        $input = json_decode(file_get_contents("php://input"), true);
-        $message = $input["message"] ?? '';
+        header('Content-Type: application/json');
 
-        // Clé API Groq (à mettre dans un fichier .env ou config sécurisé)
-        $apiKey = GROQ_API_KEY;
+        $input = json_decode(file_get_contents('php://input'), true);
+        $message = $input['message'] ?? null;
 
-        // Prépare la requête
-        $data = [
-            "model" => "llama-3.1-8b-instant",
-            "messages" => [
-                ["role" => "system", "content" => "Tu es un assistant pédagogique qui aide les élèves de 6e."],
-                ["role" => "user", "content" => $message]
-            ]
-        ];
+        if (empty($message)) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Missing message parameter']);
+            return;
+        }
 
-        // Appel API Groq
-        $ch = curl_init("https://api.groq.com/openai/v1/chat/completions"); /* Ici on stock la connexion*/
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); /*Configure cURL pour retourner la réponse au lieu de l'afficher directement*/
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Authorization: Bearer $apiKey", /*Ajoute l'en-tête d'autorisation avec la clé API*/
-            "Content-Type: application/json" /*Spécifie que le contenu est au format JSON*/
-        ]);
-        curl_setopt($ch, CURLOPT_POST, true);/*Indique que c'est une requête POST*/
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));/*Encode les données en JSON et les envoie dans le corps de la requête*/
+        // Utilise le client centralisé
+        try {
+            $apiKey = defined('API_KEY') ? API_KEY : '';
+            if (empty($apiKey)) {
+                throw new \RuntimeException('API_KEY is not configured');
+            }
 
-        $response = curl_exec($ch);/*Exécute la requête et stocke la réponse*/
-        curl_close($ch);/*Ferme la session cURL*/
+            $client = new AiClient($apiKey);
+            $resp = $client->sendMessage($message);
 
-        header('Content-Type: application/json');/*Définit l'en-tête de la réponse comme JSON*/
-        echo $response;/*Renvoie la réponse de l'API au client*/
+            // Normaliser la réponse vers le front (exemple pour structure "choices" similaire)
+            // On renvoie directement la réponse décodée pour que le front puisse l'afficher.
+            echo json_encode($resp);
+        } catch (\Throwable $e) {
+            http_response_code(500);
+            echo json_encode(['error' => $e->getMessage()]);
+        }
     }
 
 }

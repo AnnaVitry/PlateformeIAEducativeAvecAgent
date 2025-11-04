@@ -29,3 +29,4 @@ define('DB_HOST', $config['DB_HOST'] ?? 'localhost');
 define('DB_NAME', $config['DB_NAME'] ?? '');// Ceci '' est recommandé par défaut.
 define('DB_USER', $config['DB_USER'] ?? '');// SiDB_<...> n'est pas dans le fichier .env,
 define('DB_PASS', $config['DB_PASS'] ?? '');// le script échoue en toute sécurité lors de la tentative de connexion PDO
+define('API_KEY', $config['API_KEY'] ?? '');// Même principe pour la clé API

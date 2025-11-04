@@ -2,14 +2,6 @@
 // <?php
 namespace App\Models;
 
-// class Users
-// {
-//     public function __construct()
-//     {
-//         echo "Classe Users chargée !<br>";
-//     }
-// }
-
 require_once __DIR__ . '/../Config/Database.php';
 
 use App\Config\Database;

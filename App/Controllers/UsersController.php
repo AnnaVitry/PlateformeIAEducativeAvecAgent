@@ -1,6 +1,12 @@
 <?php
 namespace App\Controllers;
 
+// require_once __DIR__ . '/../Config/Autoloader.php';
+
+// use App\Config\Autoloader;
+// // Autoload de toutes les classes
+// Autoloader::register();
+
 // Chemin relatif depuis le dossier Controllers
 require_once __DIR__ . '/../Models/Users.php';
 

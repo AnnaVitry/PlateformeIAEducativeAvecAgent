@@ -2,6 +2,12 @@
 // <?php
 namespace App\Models;
 
+// require_once __DIR__ . '/../Config/Autoloader.php';
+
+// use App\Config\Autoloader;
+// // Autoload de toutes les classes
+// Autoloader::register();
+
 require_once __DIR__ . '/../Config/Database.php';
 
 use PDO;

@@ -8,6 +8,7 @@ use App\Config;
 
 // Autoload de toutes les classes
 Autoloader::register();
+
 use App\Models\Agents;
 use App\Services\AiClient;
 // echo API_KEY;

@@ -15,6 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require_once __DIR__ . '/../../App/Config/config.php';
 require_once __DIR__ . '/../../App/Controllers/AgentsController.php';
 
+// require_once __DIR__ . '/../Config/Autoloader.php';
+
+// use App\Config\Autoloader;
+// // Autoload de toutes les classes
+// Autoloader::register();
+
 use App\Controllers\AgentsController;
 
 $controller = new AgentsController();

@@ -36,8 +36,8 @@ CREATE TABLE Users (
     email VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     consentement BOOLEAN NOT NULL,
-    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    id_role INT NOT NULL,
+    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_role INT,
     FOREIGN KEY(id_role) REFERENCES Roles(id_role)
 );
 
@@ -45,8 +45,8 @@ CREATE TABLE Agents (
     id_agent INT AUTO_INCREMENT PRIMARY KEY,
     prompt TEXT,
     historic TEXT,
-    id_subject INT NOT NULL,
-    id_level INT NOT NULL,
+    id_subject INT,
+    id_level INT,
     FOREIGN KEY(id_subject) REFERENCES Subjects(id_subject),
     FOREIGN KEY(id_level) REFERENCES Levels(id_level)
 );
@@ -55,11 +55,10 @@ CREATE TABLE Agents (
 -- TABLES D’ASSOCIATION
 -- ===================================
 
-CREATE TABLE Discucss (
+CREATE TABLE Discuss (
     id_discuss INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
     id_agent INT,
-    PRIMARY KEY(id_user, id_agent),
     FOREIGN KEY(id_user) REFERENCES Users(id_user),
     FOREIGN KEY(id_agent) REFERENCES Agents(id_agent)
 );
@@ -68,7 +67,6 @@ CREATE TABLE Has (
     id_has INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
     id_level INT,
-    PRIMARY KEY(id_user, id_level),
     FOREIGN KEY(id_user) REFERENCES Users(id_user),
     FOREIGN KEY(id_level) REFERENCES Levels(id_level)
 );
@@ -77,7 +75,6 @@ CREATE TABLE Study (
     id_study INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
     id_subject INT,
-    PRIMARY KEY(id_user, id_subject),
     FOREIGN KEY(id_user) REFERENCES Users(id_user),
     FOREIGN KEY(id_subject) REFERENCES Subjects(id_subject)
 );

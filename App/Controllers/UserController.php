@@ -31,5 +31,5 @@ class UserController {
 
     public function deleteUser($id): bool {
         return $this->user->delete(id: $id);
-    }    
+    }
 }

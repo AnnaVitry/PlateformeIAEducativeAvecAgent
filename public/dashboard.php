@@ -1,5 +1,15 @@
 <?php
 namespace App\Views;
+
+require_once __DIR__ . '/../App/Config/Autoloader.php';
+require_once __DIR__ . "/../App/Config/config.php";
+
+use App\Config\Autoloader;
+use App\Config;
+
+// Autoload de toutes les classes
+Autoloader::register();
+
 ?>
 
 <!DOCTYPE html>

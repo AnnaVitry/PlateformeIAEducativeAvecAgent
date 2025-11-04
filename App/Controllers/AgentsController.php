@@ -1,13 +1,16 @@
 <?php
 namespace App\Controllers;
 
-require_once __DIR__ . '/../Models/Agents.php'; // Inclure le modèle Agent
-require_once __DIR__ . "/../Config/config.php";
-require_once __DIR__ . '/../Services/AiClient.php';
+require_once __DIR__ . '/../Config/Autoloader.php';
 
+use App\Config\Autoloader;
+use App\Config;
+
+// Autoload de toutes les classes
+Autoloader::register();
 use App\Models\Agents;
 use App\Services\AiClient;
-
+// echo API_KEY;
 class AgentsController {
 
     public function handleRequest()

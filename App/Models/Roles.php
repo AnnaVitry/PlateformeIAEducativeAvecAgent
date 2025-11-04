@@ -5,31 +5,35 @@ namespace App\Models;
 require_once __DIR__ . '/../Config/Database.php';
 
 use App\Config\Database;
+use PDO;
+use PDOException;
 
 class Roles {
 
     private $conn;
-    public function __construct()
+    public function __construct(PDO $db)
     {
-        $database = new Database();
-        $this->conn = $database->connect();
+        $this->conn = $db;
     }
 
-    public function create($role) {
+    public function create($role)
+    {
         $sql = "INSERT INTO Roles (role) VALUES (:role)";
         $stmt =  $this->conn->prepare($sql);
         $stmt->bindParam(':role', $role);
         return $stmt->execute();
     }
 
-    public function read(){
+    public function read()
+    {
         $sql = "SELECT * FROM Roles";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $role){
+    public function update($id, $role)
+    {
         $sql = "UPDATE Roles SET role = :role WHERE id_role = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':role', $role);
@@ -37,7 +41,8 @@ class Roles {
         return $stmt->execute();
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $sql ="DELETE FROM Roles WHERE id_role = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);

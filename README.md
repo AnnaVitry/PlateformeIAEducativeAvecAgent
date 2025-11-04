@@ -10,10 +10,10 @@ PlateformeIAEducativeAvecAgent/
 │   │   └── config.php
 │   │
 │   ├── Controllers/
-│   │   ├── UserController.php
+│   │   ├── UsersController.php
 │   │   ├── AgentsController.php
 │   │   ├── LevelsController.php
-│   │   └── RoleController.php
+│   │   └── RolesController.php
 │   │
 │   ├── Models/
 │   │   ├── Users.php

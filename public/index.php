@@ -2,12 +2,18 @@
 require_once __DIR__ . '/../App/Config/Autoloader.php';
 
 use App\Config\Autoloader;
+use App\Config\Database;
+use App\Controllers\UsersController;
 
-
+// Autoload de toutes les classes
 Autoloader::register();
 
-// Exemple : charger un contrôleur automatiquement
-use App\Controllers\UserController;
+// Connexion à la base de données
+$db = new Database();
+$pdo = $db->connect(); // retourne ton objet PDO
 
-$controller = new UserController();
+// On passe $pdo au contrôleur
+$controller = new UsersController($pdo);
+
+// Exemple d’appel d’une méthode du contrôleur
 $controller->getUser();

@@ -2,7 +2,7 @@
 
 namespace App\Views;
 
-require_once __DIR__ . '/../App/Config/Autoloader.php';
+require_once __DIR__ . '/../Config/Autoloader.php';
 
 use App\Controllers\UsersController;
 use App\Config\Autoloader;
@@ -14,7 +14,8 @@ Autoloader::register();
 // Connexion à la base de données
 $db = new Database();
 $pdo = $db->connect(); // retourne ton objet PDO
-
+$isRegister = False;
+$inscription = Null;
 // Traiter le formulaire si soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $UsersController = new UsersController($pdo);    
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $consentement = isset($_POST['consentement']) ? 1 : 0;
     
-    $result = $UsersController->createUser(
+    $isRegister = $UsersController->createUser(
         $lastname, 
         $firstname, 
         $email, 
@@ -32,66 +33,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $consentement, 
     );
     
-    if ($result) {
-        echo "<p style='color: green;'>Inscription réussie !</p>";
+    if ($isRegister) {
+        $inscription = "<p style='color: green;'>Inscription réussie !</p>";
     } else {
-        echo "<p style='color: red;'>Erreur lors de l'inscription.</p>";
+        $inscription = "<p style='color: red;'>Erreur lors de l'inscription.</p>";
     }
 }
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../App/public/css/inscription.css">
-    <link rel="stylesheet" href="../public/css/style.css">
-    <title>Inscription</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">🎓 EduAI</div>
-            <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#matieres">Matières</a></li>
-                <li><a href="#fonctionnalites">Fonctionnalités</a></li>
-                <li><a href="../App/Views/user_registration.php" class="btn-primary">Commencer</a></li>
-            </ul>
-        </nav>
-    </header>
-    <h1>Inscription</h1>
+if (isset($inscription)) {
+    echo "<span>" . $inscription . "</span>";
+}
+
+if (isset($isRegister) && !$isRegister) {
+?>
+<form class="box" method="POST" action="./register.php">
+    <h1 class="box-title">S'inscrire</h1>
+	<input type="text" class="box-input" id="lasttname" name="lasttname" placeholder="Nom" required />
+    <input type="text" class="box-input" id="firstname" name="firstname" placeholder="Prénom" required>
+    <input type="text" class="box-input" id="email" name="email" placeholder="Email" required />
+    <input type="password" class="box-input" id="password" name="password" placeholder="Mot de passe" required />
+    <input type="submit" name="submit" value="S'inscrire" class="box-button" />
+</form>
+<?php 
+}
+if (isset($isRegister) && $isRegister) {
+    echo "<script>" .  "redirection vers dashboard avec timer 5sec" . "</script>";
+}
+?>
     
-    <form method="POST" action="">
-        <div>
-            <label for="lastname">Nom :</label>
-            <input type="text" id="lastname" name="lastname" required>
-        </div>
-        
-        <div>
-            <label for="firstname">Prénom :</label>
-            <input type="text" id="firstname" name="firstname" required>
-        </div>
-        
-        <div>
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        
-        <div>
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        
-        <div>
-            <label>
-                <input type="checkbox" name="consentement" required>
-                J'accepte les conditions d'utilisation
-            </label>
-        </div>
-        
-        <button type="submit">S'inscrire</button>
-    </form>
-</body>
-</html>

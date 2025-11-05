@@ -19,7 +19,7 @@ class Database
                 DB_PASS
             );
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connexion au serveur MySQL réussie. Base de données <br>";
+            // echo "Connexion au serveur MySQL réussie. Base de données <br>";
         } catch (PDOException $e) {
             echo "Erreur de connexion au serveur MySQL: " . $e->getMessage();
         }
@@ -30,7 +30,7 @@ class Database
     {
         try {
             $this->pdo->exec("USE `" . DB_NAME . "`;");
-            echo "Base de données '" . DB_NAME . "' sélectionnée.<br>";
+            // echo "Base de données '" . DB_NAME . "' sélectionnée.<br>";
         } catch (PDOException $e) {
             // Si erreur "Unknown database", on crée la base
             if (str_contains($e->getMessage(), 'Unknown database')) {

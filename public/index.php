@@ -1,19 +1,39 @@
 <?php
+// public/index.php
+
 require_once __DIR__ . '/../App/Config/Autoloader.php';
 
 use App\Config\Autoloader;
-use App\Config\Database;
 use App\Controllers\UsersController;
+use App\Config\Database;
 
-// Autoload de toutes les classes
 Autoloader::register();
 
-// Connexion à la base de données
+// Connection à la DB
 $db = new Database();
-$pdo = $db->connect(); // retourne ton objet PDO
+$pdo = $db->connect();
 
-// On passe $pdo au contrôleur
-$controller = new UsersController($pdo);
+// Simple routing via paramètre GET (ex: ?page=login)
+$page = $_GET['page'] ?? 'home';
 
-// Exemple d’appel d’une méthode du contrôleur
-$controller->getUser();
+// Contrôleur selon la page
+switch ($page) {
+    case 'login':
+        $controller = new UsersController($pdo);
+        $controller->login($_POST);
+        break;
+        
+    case 'register':
+        $controller = new UsersController($pdo);
+        $controller->register($_POST);
+        break;
+        
+    // case 'dashboard':
+    //     $controller = new UsersController($pdo);
+    //     $controller->dashboard();
+    //     break;
+        
+    default:
+        include __DIR__ . '/../App/Views/home.php';
+        break;
+}

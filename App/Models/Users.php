@@ -49,7 +49,7 @@ class Users {
 
     public function update($id, $lastname, $firstname, $email, $password): bool
     {
-        $sql = "UPDATE Users SET lastname = :lastname, firstname = :firstname, email =:email, password = :password WHERE id = :id";
+        $sql = "UPDATE Users SET lastname = :lastname, firstname = :firstname, email = :email, password = :password WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':lastname', $lastname);
         $stmt->bindParam(':firstname', $firstname);
@@ -65,5 +65,14 @@ class Users {
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
+    }
+
+    public function findByEmail($email)
+    {
+        $sql = "SELECT * FROM Users WHERE 'email' = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

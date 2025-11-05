@@ -40,4 +40,52 @@ class UsersController {
     {
         return $this->user->delete(id: $id);
     }
+
+    public function getUserByEmail($email): array
+    {
+        return $this->user->findByEmail($email);
+    }
+
+    public function register($json_form)
+    {
+        $lastname = $json_form['lastname'] ?? null;
+        $firstname = $json_form['firstname'] ?? null;
+        $email = $json_form['email'] ?? null;
+        $password = $json_form['password'] ?? null;
+        $consentement = $json_form['consentment'] ?? null;
+
+        $this->createUser($lastname, $firstname, $email, $password, $consentement);
+    }
+
+    public function login($json_form)
+    {
+        $email = $json_form['email'] ?? null;
+        $password = $json_form['password'] ?? null;
+
+        if (!$email || !$password) {
+            // Retourner une erreur si les champs sont vides
+            echo "Veuillez remplir tous les champs.";
+            return;
+        }
+        // Vérifier si un utilisateur existe avec cet email
+        $user = $this->getUserByEmail($email);
+        
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        
+
+        if (!$user) {
+            echo "Aucun utilisateur trouvé avec cet email.";
+            return;
+        }
+        if ($user['password'] == $hashedPassword) {
+            // bon login envoyer vers Dashboard
+            $this->user = '' ; // fonction qui lui reatribue l'objet user qui s'est connecté
+        }
+        elseif ($user != True ) {
+            // Password ou Email éronné page login essaye encore
+        }
+        else {
+            // Password ou Email éronné page login essaye encore
+        }
+    }
 }

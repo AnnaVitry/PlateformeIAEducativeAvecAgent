@@ -1,11 +1,11 @@
 <?php
 namespace App\Models;
 
-// require_once __DIR__ . '/../Config/Autoloader.php';
+require_once __DIR__ . '/../Config/Autoloader.php';
 
-// use App\Config\Autoloader;
+use App\Config\Autoloader;
 // // Autoload de toutes les classes
-// Autoloader::register();
+Autoloader::register();
 
 use PDO;
 use PDOException;

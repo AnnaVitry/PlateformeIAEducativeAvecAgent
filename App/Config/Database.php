@@ -19,42 +19,68 @@ class Database
                 DB_PASS
             );
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connexion au serveur MySQL réussie. Base de données <br>";
+            error_log("Connexion au serveur MySQL réussie. Base de données");
         } catch (PDOException $e) {
-            echo "Erreur de connexion au serveur MySQL: " . $e->getMessage();
+            error_log("Erreur de connexion au serveur MySQL : " . $e->getMessage());
         }
     }
 
     // Connexion à la base de données
-    public function connect()
-    {
-        try {
+    public function connect($useDb = true) {  // Nouveau param : $useDb = false pour création sans USE
+    try {
+        // Connexion sans DB sélectionnée
+        $dsn = "mysql:host=" . DB_HOST . ";charset=utf8mb4";
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ];
+        $this->pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+
+        error_log("Connexion au serveur MySQL réussie.");  // Log au lieu d'echo
+
+        if ($useDb && !empty(DB_NAME)) {
             $this->pdo->exec("USE `" . DB_NAME . "`;");
-            echo "Base de données '" . DB_NAME . "' sélectionnée.<br>";
-        } catch (PDOException $e) {
-            // Si erreur "Unknown database", on crée la base
-            if (str_contains($e->getMessage(), 'Unknown database')) {
-                echo "⚠️ Base '" . DB_NAME . "' introuvable. Création en cours...<br>";
-                $this->createDatabase();
-            } else {
-                echo "Erreur lors de la sélection de la base : " . $e->getMessage();
-            }
+            error_log("Base de données '" . DB_NAME . "' sélectionnée.");
         }
 
         return $this->pdo;
-
-    }
-    // Création de la base de données si elle n'existe pas
-    public function createDatabase()
-    {
-        try {
-            $this->connect(); // Connexion initiale pour exécuter les commandes SQL
-            $this->pdo->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;");
-            echo "Base de données '" . DB_NAME . "' a bien été créer.\n";
-        } catch (PDOException $e) {
-            echo "Erreur lors de la création de la base de données : " . $e->getMessage();
+    } catch (PDOException $e) {
+        error_log("Erreur PDO connect: " . $e->getMessage());
+        if (str_contains($e->getMessage(), 'Unknown database') && $useDb) {
+            error_log("⚠️ Base '" . DB_NAME . "' introuvable, tentative de création...");
+            $this->createDatabase();  // Appel unique, sans boucle
+            return $this->connect($useDb);  // Re-tente après création (1 appel max)
         }
+        throw $e;  // Relance si autre erreur
     }
+}
+
+public function createDatabase() {
+    try {
+        // Connexion SANS USE DB (param false pour éviter récursion)
+        $dsn = "mysql:host=" . DB_HOST . ";charset=utf8mb4";
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ];
+        $pdoTemp = new PDO($dsn, DB_USER, DB_PASS, $options);  // PDO temp sans DB
+
+        // Crée la DB si pas existante
+        $pdoTemp->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+
+        error_log("✅ Base de données '" . DB_NAME . "' créée avec succès.");
+
+        // Import SQL si fichier existe
+        $this->importSQL($pdoTemp);  // Passe PDO temp
+
+        $pdoTemp = null;  // Ferme temp
+    } catch (PDOException $e) {
+        error_log("Erreur création DB: " . $e->getMessage());
+        throw $e;
+    }
+}
 
     // Importer le fichier SQL
     public function importSQL()
@@ -67,9 +93,9 @@ class Database
             // Lire les commandes SQL et les exécuter
             $sqlCommands = file_get_contents($sqlFile);
             $this->pdo->exec($sqlCommands);
-            echo "Tables importées avec succès.\n";
+            error_log("Fichier SQL importé avec succès.");
         } catch (PDOException $e) {
-            echo "Erreur lors de l'importation du fichier SQL : " . $e->getMessage();
+            error_log("Erreur lors de l'importation du fichier SQL : " . $e->getMessage());
         }
     }
 
@@ -78,9 +104,9 @@ class Database
     {
         try {
             $tables = $this->pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
-            echo "Tables créées : " . implode(', ', $tables) . "\n";
+            error_log("Tables dans la base de données '" . DB_NAME . "': " . implode(", ", $tables));
         } catch (PDOException $e) {
-            echo "Erreur lors de la récupération des tables : " . $e->getMessage();
+            error_log("Erreur lors de la récupération des tables : " . $e->getMessage());
         }
     }
 }

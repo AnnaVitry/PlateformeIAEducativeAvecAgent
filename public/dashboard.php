@@ -1,33 +1,32 @@
-<?php
-namespace App\Views;
-
-require_once __DIR__ . '/../App/Config/Autoloader.php';
-require_once __DIR__ . "/../App/Config/config.php";
-
-use App\Config\Autoloader;
-use App\Config;
-
-// Autoload de toutes les classes
-Autoloader::register();
-
-?>
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/dashboard.css">
-    <script src="/js/style.js"></script>
-    <title>Madame IrmIA</title>
-    
+    <title>Dashboard Wizard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
+    <div class="dashboard-wrapper">
+        <?php include __DIR__ . '/../App/Views/sidebar.php'; ?>
 
-<?php
-include __DIR__ . '/../App/Views/sidebar.php'; 
-include __DIR__ . '/../App/Views/dashboardMain.php'; 
-?>
+        <div class="main-section">
+            <?php include __DIR__ . '/../App/Views/dashboardMain.php'; ?>
+        </div>
+    </div>
 
+    <?php if (!empty($users)): ?>
+    <div class="users-list">
+        <h3>Users :</h3>
+        <ul>
+            <?php foreach ($users as $u): ?>
+                <li><?= htmlspecialchars($u['firstname'] . ' ' . $u['lastname']) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+
+    <script src="js/style.js"></script>
 </body>
 </html>

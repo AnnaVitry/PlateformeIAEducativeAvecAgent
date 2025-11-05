@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-// require_once __DIR__ . '/../Config/Autoloader.php';
+require_once __DIR__ . '/../Config/Autoloader.php';
 
-// use App\Config\Autoloader;
-// // Autoload de toutes les classes
-// Autoloader::register();
+use App\Config\Autoloader;
+Autoloader::register();
 
 require_once __DIR__ . '/../Config/Database.php';
 

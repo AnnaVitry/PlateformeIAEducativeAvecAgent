@@ -5,15 +5,44 @@ use App\Config\Autoloader;
 use App\Config\Database;
 use App\Controllers\UsersController;
 
-// Autoload de toutes les classes
 Autoloader::register();
 
-// Connexion à la base de données
 $db = new Database();
-$pdo = $db->connect(); // retourne ton objet PDO
-
-// On passe $pdo au contrôleur
+$pdo = $db->connect();
 $controller = new UsersController($pdo);
 
-// Exemple d’appel d’une méthode du contrôleur
-$controller->getUser();
+$route = $_GET['route'] ?? 'home';
+
+switch ($route) {
+    case 'login':
+        include __DIR__ . '/Views/login.php';
+        break;
+        
+    case 'connexion':
+        if ($_POST) {
+            // TODO: Vérif email/password
+        }
+        break;
+        
+    case 'dashboard':
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: ?route=login');
+            exit;
+        }
+        $users = $controller->getUser();
+        // CORRECTION : Charge depuis public/, pas Views/
+        include __DIR__ . '/dashboard.php';
+        break;
+
+    case 'logout':
+        session_start();
+        session_destroy();
+        header('Location: ?route=login');
+        exit;
+        break;
+        
+    default:
+        header('Location: ?route=login');
+        break;
+}

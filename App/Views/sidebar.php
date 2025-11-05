@@ -1,49 +1,34 @@
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Logo -->
-        <div class="sidebar-logo">
-            <div class="logo-icon">IA</div>
-            <div>
-                <div class="logo-text">Madame IrmIA</div>
-                <div class="logo-beta">PromoDevIA</div>
-            </div>
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">🧙</div>
+        <div class="logo-text">Poudlard IA</div>
+        <div class="logo-beta">Beta</div>
+    </div>
+    <nav class="menu">
+        <a href="/?route=users" class="menu-item active">
+            <span class="menu-item-icon">👥</span>
+            Users
+        </a>
+        <a href="/?route=levels" class="menu-item">
+            <span class="menu-item-icon">⭐</span>
+            Niveaux
+        </a>
+        <a href="/?route=subjects" class="menu-item">
+            <span class="menu-item-icon">📚</span>
+            Sujets
+        </a>
+        <a href="/?route=logout" class="menu-item">
+            <span class="menu-item-icon">🚪</span>
+            Déconnexion
+        </a>
+    </nav>
+    <div class="credits">
+        <div class="credits-header">
+            <span>Crédits Magiques</span>
         </div>
-
-        <!-- Menu Items -->
-        <div class="menu">
-            <a href="#" class="menu-item active">
-                <span class="menu-item-icon">🏠</span>
-                <span>Accueil</span>
-            </a>
-            <!-- <a href="#" class="menu-item">
-                <span class="menu-item-icon">📊</span>
-                <span>Dashboard</span>
-            </a> -->
-            <a href="#" class="menu-item">
-                <span class="menu-item-icon">📁</span>
-                <span>Historique</span>
-            </a>
-            <a href="#" class="menu-item">
-                <span class="menu-item-icon">⚙️</span>
-                <span>Paramètres</span>
-            </a>
-        </div>
-
-        <!-- Credits -->
-        <div class="credits">
-            <div class="credits-header">
-                <span>⚡</span>
-                <span>Canard pou un poule</span>
-            </div>
-            <div class="credits-value">800 / 1000 canard_poule</div>
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
-            </div>
-        </div>
-
-        <!-- Support -->
-        <div class="support">
-            <div class="support-text">💬 Support & Aide</div>
+        <div class="credits-value">3/10 sorts restants</div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 30%;"></div>
         </div>
     </div>
+</div>

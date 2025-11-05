@@ -2,11 +2,11 @@
 // <?php
 namespace App\Models;
 
-// require_once __DIR__ . '/../Config/Autoloader.php';
+require_once __DIR__ . '/../Config/Autoloader.php';
 
-// use App\Config\Autoloader;
+use App\Config\Autoloader;
 // // Autoload de toutes les classes
-// Autoloader::register();
+Autoloader::register();
 
 require_once __DIR__ . '/../Config/Database.php';
 
@@ -20,6 +20,14 @@ class Users {
     public function __construct(PDO $db)
     {
         $this->conn = $db;
+    }
+
+    public function findByEmail($email) {
+    $sql = "SELECT * FROM Users WHERE email = :email";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function create($lastname, $firstname, $email, $password, $consentement): bool

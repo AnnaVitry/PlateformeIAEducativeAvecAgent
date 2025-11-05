@@ -1,55 +1,67 @@
-// Exemple minimal: envoi du message au endpoint serveur et affichage basique en DOM.
-document.addEventListener('DOMContentLoaded', function () {
-	const form = document.getElementById('chat-form');
-	const input = document.getElementById('message-input');
-	const container = document.querySelector('.messages-container');
+// Function appendMessage globale (appelée partout)
+function appendMessage(sender, text, container = document.querySelector('.messages-container')) {
+    if (!container) {
+        console.error('Conteneur messages non trouvé');
+        return;
+    }
+    const div = document.createElement('div');
+    div.className = `message ${sender}`;
+    div.textContent = text;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+    console.log(`✅ Message ajouté: ${sender} - ${text.substring(0, 50)}...`);
+}
 
-	if (!form || !input || !container) return;
+// DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('message-input');
+    const messagesContainer = document.querySelector('.messages-container');
 
-	form.addEventListener('submit', async function (e) {
-		e.preventDefault();
-		const text = input.value.trim();
-		if (!text) return;
+    if (!form || !input || !messagesContainer) {
+        console.error('❌ Éléments chat manquants – check HTML');
+        return;
+    }
 
-		// Affiche le message utilisateur immédiatement
-		const userDiv = document.createElement('div');
-		userDiv.className = 'message user';
-		userDiv.textContent = text;
-		container.appendChild(userDiv);
+    console.log('🚀 Chat JS chargé');
 
-		input.value = '';
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-		try {
-			// Adjuster l'URL si votre webroot n'est pas `public/`.
-			const res = await fetch('../api/ai.php', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ message: text })
-			});
+        // ← FIX : message déclarée ICI, dans le scope submit
+        const message = input.value.trim();
+        console.log('📤 User message:', message);  // Log pour tracer
+        if (!message) return;
 
-			const json = await res.json();
+        // Ajoute user message
+        appendMessage('user', message);
 
-			let replyText = 'Erreur API';
-			// Essayez de récupérer le contenu suivant la structure retournée par le fournisseur
-			if (json.choices && Array.isArray(json.choices) && json.choices[0]?.message?.content) {
-				replyText = json.choices[0].message.content;
-			} else if (json.error) {
-				replyText = 'Erreur: ' + (json.error.message || json.error);
-			} else if (typeof json === 'string') {
-				replyText = json;
-			}
+        input.value = '';  // Clear
 
-			const botDiv = document.createElement('div');
-			botDiv.className = 'message assistant';
-			botDiv.textContent = replyText;
-			container.appendChild(botDiv);
-			container.scrollTop = container.scrollHeight;
+        try {
+            const response = await fetch('/PlateformeIAEducativeAvecAgent/public/api/ai.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message: message})
+            });
 
-		} catch (err) {
-			const errDiv = document.createElement('div');
-			errDiv.className = 'message assistant';
-			errDiv.textContent = 'Erreur réseau: ' + err.message;
-			container.appendChild(errDiv);
-		}
-	});
+            console.log('📡 Fetch response status:', response.status);  // Log status
+
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            const data = await response.json();  // Direct json() si clean
+
+            if (data.error) {
+                appendMessage('assistant', `❌ Erreur: ${data.error}`);
+            } else if (data.reply) {
+                appendMessage('assistant', data.reply);
+            } else {
+                appendMessage('assistant', '🤷 Réponse vide – réessaie !');
+            }
+
+        } catch (err) {
+            console.error('💥 Erreur fetch:', err);
+            appendMessage('assistant', `Erreur: ${err.message}`);
+        }
+    });
 });

@@ -4,7 +4,8 @@
 $dotenv_path = __DIR__ . '/.env';
 
 if (!file_exists($dotenv_path)) {
-    die("Erreur: Le fichier .env est introuvable. Veuillez le créer et le remplir.\n");
+    error_log("Erreur: .env manquant"); // Log au lieu de die()
+    // Ou die() en prod
 }
 
 

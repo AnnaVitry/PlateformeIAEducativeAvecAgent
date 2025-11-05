@@ -1,5 +1,4 @@
-<?php
-session_start(); // En haut du fichier ?>
+
 <div class="login-container">
     <?php if (isset($_SESSION['user_id'])): ?>
         <p>Vous êtes connecté ! <a href="/App/public/?route=dashboard">Aller au Dashboard</a> | <a href="/App/public/?route=logout">Déconnexion</a></p>

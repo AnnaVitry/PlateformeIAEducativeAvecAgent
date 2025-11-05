@@ -2,7 +2,7 @@
 
 namespace App\Views;
 
-require_once __DIR__ . '/../App/Config/Autoloader.php';
+require_once __DIR__ . '/../../App/Config/Autoloader.php';
 
 use App\Controllers\UsersController;
 use App\Config\Autoloader;

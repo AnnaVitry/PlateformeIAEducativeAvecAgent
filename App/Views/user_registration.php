@@ -17,7 +17,9 @@ $pdo = $db->connect(); // retourne ton objet PDO
 $isRegister = False;
 $inscription = Null;
 // Traiter le formulaire si soumis
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo $_POST['Consentment'];
     $UsersController = new UsersController($pdo);    
     $lastname = $_POST['lastname'] ?? '';
     $firstname = $_POST['firstname'] ?? '';
@@ -52,12 +54,32 @@ if (isset($isRegister) && !$isRegister) {
     <input type="text" class="box-input" id="firstname" name="firstname" placeholder="Prénom" required>
     <input type="text" class="box-input" id="email" name="email" placeholder="Email" required />
     <input type="password" class="box-input" id="password" name="password" placeholder="Mot de passe" required />
+    <input type="hidden" id="consentement" name="consentment" value="0" />
+    <input type="checkbox" id="consentement" name="consentment" value="1" /><label for="consentement"> consentement</label>
+    <!-- <input type="checkbox" id="consentement" name="consentement" required /><label for="consentement"> consentement</label> -->
     <input type="submit" name="submit" value="S'inscrire" class="box-button" />
 </form>
+?>
+<script>
+    document.addEventListener('DOMContentLoaded', e => {
+        for (let checkbox of document.querySelectorAll('input[type=checkbox]')) {
+            checkbox.value = checkbox.checked ? 1 : 0;
+            checkbox.addEventListener('change', e => {
+                e.target.value = e.target.checked ? 1 : 0;
+            });
+        }
+    });
+</script>
 <?php 
 }
 if (isset($isRegister) && $isRegister) {
-    echo "<script>" .  "redirection vers dashboard avec timer 5sec" . "</script>";
+    echo 
+    '<script>
+        setTimeout(function() {
+            window.location.href = "dashboard.php";
+        }, 2000);
+    </script>'; 
+    // echo "<script>" .  "redirection vers dashboard avec timer 5sec" . "</script>";
 }
-?>
+
     
